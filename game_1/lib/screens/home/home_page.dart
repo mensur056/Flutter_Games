@@ -10,28 +10,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   double playerX = 0;
-  double playerY = 1;
+
   void moveLeft() {
     setState(() {
-      playerX -= 0.1;
+      if (playerX - 0.1 < -1) {
+      } else {
+        playerX -= 0.1;
+      }
     });
   }
 
   void moveRight() {
     setState(() {
-      playerX += 0.1;
-    });
-  }
-
-  void moveUp() {
-    setState(() {
-      playerY -= 0.1;
-    });
-  }
-
-  void moveDown() {
-    setState(() {
-      playerY += 0.1;
+      if (playerX + 0.1 > 1) {
+      } else {
+        playerX += 0.1;
+      }
     });
   }
 
@@ -47,7 +41,7 @@ class _HomePageState extends State<HomePage> {
               child: Center(
                 child: Stack(children: [
                   Container(
-                    alignment: Alignment(playerX, playerY),
+                    alignment: Alignment(playerX, 1),
                     child: Container(
                       height: 70,
                       width: 70,
@@ -68,15 +62,6 @@ class _HomePageState extends State<HomePage> {
                   MyButton(
                     function: moveLeft,
                     icon: Icons.chevron_left_outlined,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      MyButton(
-                          icon: Icons.arrow_upward_rounded, function: moveUp),
-                      MyButton(
-                          icon: Icons.arrow_downward_sharp, function: moveDown),
-                    ],
                   ),
                   MyButton(
                     icon: Icons.chevron_right_outlined,
