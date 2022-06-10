@@ -10,9 +10,30 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   double playerX = 0;
-  void moveLeft() {}
-  void moveRight() {}
-  void moveUp() {}
+  double playerY = 1;
+  void moveLeft() {
+    setState(() {
+      playerX -= 0.1;
+    });
+  }
+
+  void moveRight() {
+    setState(() {
+      playerX += 0.1;
+    });
+  }
+
+  void moveUp() {
+    setState(() {
+      playerY -= 0.1;
+    });
+  }
+
+  void moveDown() {
+    setState(() {
+      playerY += 0.1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +47,7 @@ class _HomePageState extends State<HomePage> {
               child: Center(
                 child: Stack(children: [
                   Container(
-                    alignment: Alignment(playerX, 1),
+                    alignment: Alignment(playerX, playerY),
                     child: Container(
                       height: 70,
                       width: 70,
@@ -48,7 +69,15 @@ class _HomePageState extends State<HomePage> {
                     function: moveLeft,
                     icon: Icons.chevron_left_outlined,
                   ),
-                  MyButton(icon: Icons.arrow_upward_rounded, function: moveUp),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      MyButton(
+                          icon: Icons.arrow_upward_rounded, function: moveUp),
+                      MyButton(
+                          icon: Icons.arrow_downward_sharp, function: moveDown),
+                    ],
+                  ),
                   MyButton(
                     icon: Icons.chevron_right_outlined,
                     function: moveRight,
